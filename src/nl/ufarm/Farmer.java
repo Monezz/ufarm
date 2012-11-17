@@ -22,10 +22,13 @@ public class Farmer extends ImageView {
         NORMAL,WATERING;
     }
     
+    private static final Image IMG_MODE_NORMAL = new Image("nl/ufarm/farmer1.png");
+    private static final Image IMG_MODE_WATERING = new Image("nl/ufarm/farmer_watering.png");
+    
     private MODE mode = MODE.NORMAL;
 
     public Farmer() {
-        super(new Image("nl/ufarm/farmer1.png"));
+        super(IMG_MODE_NORMAL);
 
         
       final DropShadow dropShadow = new DropShadow();
@@ -71,9 +74,20 @@ public class Farmer extends ImageView {
         });
 
     }
+    
+    void toggleWatering(){
+        switch(mode){
+            case WATERING:setMode(MODE.NORMAL);break;
+            default:setMode(MODE.WATERING);break;
+        }
+    }
 
     void setMode(MODE mode) {
         this.mode = mode;
+        switch(mode){
+            case NORMAL:setImage(IMG_MODE_NORMAL);break;
+            case WATERING:setImage(IMG_MODE_WATERING);break;
+        }
     }
     
     

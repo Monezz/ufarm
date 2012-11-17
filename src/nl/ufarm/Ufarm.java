@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -37,8 +38,6 @@ public class Ufarm extends Application {
 
         Scene scene = new Scene(root, 800, 450);
 
-
-
         final Farmer farmer = new Farmer();
         farmer.setX(scene.getWidth()/2);
         farmer.setY(scene.getHeight()/2);
@@ -46,14 +45,23 @@ public class Ufarm extends Application {
         final ButtonPane buttonPane = new ButtonPane();
         root.getChildren().add(buttonPane);
         
-        
         final Tractor tractor = new Tractor();
         tractor.setX(scene.getWidth()+100);
         tractor.setY(100);
         
         root.getChildren().add(tractor);
-
         root.getChildren().add(farmer);
+        
+        
+        buttonPane.addWateringActionHandler(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent t) {
+                farmer.toggleWatering();
+            }
+            
+        });
+        
 
 //        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setTitle("Hello World!");
