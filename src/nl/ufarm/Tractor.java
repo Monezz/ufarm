@@ -8,6 +8,7 @@ import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -17,11 +18,13 @@ import javafx.util.Duration;
  *
  * @author Timon Veenstra <monezz@gmail.com>
  */
-public class Tractor extends ImageView {
+public class Tractor extends Sprite {
 
-    public Tractor() {
-        super(new Image("nl/ufarm/LuckyTractor.png"));
-
+    public Tractor(double x, double y) {
+     
+        node = new ImageView((new Image("nl/ufarm/LuckyTractor.png")));
+        ((ImageView) node).setX(x);
+        ((ImageView) node).setY(y);        
 
         Path path = new Path();
         path.getElements().add(new MoveTo(850, 100));
@@ -31,10 +34,19 @@ public class Tractor extends ImageView {
         PathTransition pathTransition = new PathTransition();
         pathTransition.setDuration(Duration.millis(20000));
         pathTransition.setPath(path);
-        pathTransition.setNode(this);
+        pathTransition.setNode(this.node);
         pathTransition.setOrientation(PathTransition.OrientationType.NONE);
         pathTransition.setCycleCount(Timeline.INDEFINITE);
         pathTransition.setAutoReverse(false);
         pathTransition.play();
+    }
+
+    @Override
+    public void update() {
+    }
+
+    @Override
+    Circle getCollisionBounds() {
+        return new Circle(node.getLayoutX(), node.getLayoutY(), 100.0);
     }
 }
