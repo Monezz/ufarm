@@ -45,6 +45,7 @@ class Patch extends Sprite {
         st.play();
 
         ((ImageView)node).setFitHeight(1);
+        ((ImageView)node).setFitWidth(100);
         node.setVisible(false);
     }
 

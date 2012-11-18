@@ -124,6 +124,7 @@ public abstract class GameWorld {
      * @param sprite - The sprite to update.
      */
     protected void handleUpdate(Sprite sprite) {
+        sprite.update();
     }
 
     /**

@@ -6,10 +6,7 @@ package nl.ufarm;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.shape.Circle;
 
 /**
  * The Sprite class represents a image or node to be displayed. In a 2D game a

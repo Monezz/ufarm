@@ -18,10 +18,16 @@ import javafx.util.Duration;
  * @author Timon Veenstra <monezz@gmail.com>
  */
 public class Tractor extends Sprite {
+    
+    private static final Image[] IMG_TRACTOR_BLOODY = new Image[]{new Image("nl/ufarm/LuckyTractorBloody_1.png"),new Image("nl/ufarm/LuckyTractorBloody_2.png"),new Image("nl/ufarm/LuckyTractorBloody_3.png")};
+    private static final Image[] IMG_TRACTOR_NORMAL = new Image[]{new Image("nl/ufarm/LuckyTractor_1.png"),new Image("nl/ufarm/LuckyTractor_2.png"),new Image("nl/ufarm/LuckyTractor_3.png")};
 
+    private int current_image = 0;
+    private boolean bloody = false;
+    
     public Tractor(double x, double y) {
      
-        node = new ImageView((new Image("nl/ufarm/LuckyTractor.png")));
+        node = new ImageView((IMG_TRACTOR_NORMAL[current_image]));
         ((ImageView) node).setX(x);
         ((ImageView) node).setY(y);        
 
@@ -42,8 +48,18 @@ public class Tractor extends Sprite {
 
     @Override
     public void update() {
+        ((ImageView)node).setImage(nextImage());
     }
 
+    private Image nextImage(){
+        current_image = (current_image == 2)?0:current_image+1;
+        if (bloody){
+            return IMG_TRACTOR_BLOODY[current_image];
+        }else{
+            return IMG_TRACTOR_NORMAL[current_image];
+        }
+    }
+    
     @Override
     double getCollisionSphereSize() {
         return 100.0d;
@@ -52,7 +68,9 @@ public class Tractor extends Sprite {
     @Override
     public void handleCollisionWith(Sprite other) {
         if (other instanceof Farmer){
-            ((ImageView)node).setImage(new Image("nl/ufarm/LuckyTractorBloody.png"));
+            ((ImageView)node).setImage(IMG_TRACTOR_BLOODY[0]);
+            bloody = true;
+            current_image = 0;
         }
     }
 

@@ -18,9 +18,10 @@ import javafx.stage.Stage;
 public class UFarmGameWorld extends GameWorld {
 
     public static final int NUMBER_OF_PATCHES = 18;
+    private Rabbit rabbit;
 
     public UFarmGameWorld() {
-        super(1, "UFarm");
+        super(10, "UFarm");
     }
 
     @Override
@@ -46,10 +47,11 @@ public class UFarmGameWorld extends GameWorld {
 
 
         final Tractor tractor = new Tractor(getGameSurface().getWidth() + 100, 100);
-        final Rabbit rabbit = new Rabbit(getGameSurface().getWidth() / 3.3, 403);
 
         getSpriteManager().addSprites(farmer, tractor);
 
+        rabbit = new Rabbit(getGameSurface().getWidth() / 3.3, 403);
+        
         getSceneNodes().getChildren().add(tractor.node);
         getSceneNodes().getChildren().add(rabbit.node);
         getSceneNodes().getChildren().add(farmer.node);
@@ -57,7 +59,7 @@ public class UFarmGameWorld extends GameWorld {
         setUpPatches();
 
         getSceneNodes().getChildren().add(new ImageView("nl/ufarm/trees.png"));
-        
+
         final ButtonPane buttonPane = new ButtonPane();
         getSceneNodes().getChildren().add(buttonPane);
         buttonPane.addWateringActionHandler(new EventHandler<MouseEvent>() {
@@ -67,6 +69,7 @@ public class UFarmGameWorld extends GameWorld {
             }
         });
     }
+
 
     @Override
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
