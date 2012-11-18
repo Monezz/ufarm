@@ -6,11 +6,6 @@ package nl.ufarm;
 
 import java.awt.Color;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -26,48 +21,24 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
  */
 public class Ufarm extends Application {
 
+    private final GameWorld gameWorld = new UFarmGameWorld();
+    
     public static final int NUMBER_OF_PATCHES = 18;
 
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-
-        Pane root = new Pane();
-        root.setId("pane");
-
-        String image = this.getClass().getResource("ufarm_800_450.jpg").toExternalForm();
-        root.setStyle("-fx-background-image: url('" + image + "'); -fx-background-position: center center;  -fx-background-repeat: stretch;");
-
-        Scene scene = new Scene(root, 800, 450);
-
+        // setup title, scene, stats, controls, and actors.
+        gameWorld.initialize(primaryStage);
         setUpPatches(root);
-
-        final Farmer farmer = new Farmer();
         farmer.setX(scene.getWidth() / 2);
         farmer.setY(scene.getHeight() / 2);
 
-        final ButtonPane buttonPane = new ButtonPane();
-        root.getChildren().add(buttonPane);
-
-
-        final Tractor tractor = new Tractor();
         tractor.setX(scene.getWidth() + 100);
-        tractor.setY(100);
 
-        root.getChildren().add(tractor);
+        // kick off the game loop
+        gameWorld.beginGameLoop();
 
-        root.getChildren().add(farmer);
-
-//        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
+        // display window
         primaryStage.show();
     }
 
