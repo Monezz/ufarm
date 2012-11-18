@@ -34,6 +34,9 @@ public class Farmer extends Sprite {
         }
     }
 
+    boolean isWatering(){
+        return MODE.WATERING.equals(this.mode);
+    }
     
     enum MODE {
 
