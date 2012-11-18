@@ -46,16 +46,18 @@ public class UFarmGameWorld extends GameWorld {
 
 
         final Tractor tractor = new Tractor(getGameSurface().getWidth() + 100, 100);
-
+        final Rabbit rabbit = new Rabbit(getGameSurface().getWidth() / 3.3, 403);
 
         getSpriteManager().addSprites(farmer, tractor);
 
         getSceneNodes().getChildren().add(tractor.node);
+        getSceneNodes().getChildren().add(rabbit.node);
         getSceneNodes().getChildren().add(farmer.node);
 
         setUpPatches();
 
-
+        getSceneNodes().getChildren().add(new ImageView("nl/ufarm/trees.png"));
+        
         final ButtonPane buttonPane = new ButtonPane();
         getSceneNodes().getChildren().add(buttonPane);
         buttonPane.addWateringActionHandler(new EventHandler<MouseEvent>() {
