@@ -139,11 +139,12 @@ public abstract class GameWorld {
         // check each sprite against other sprite objects.
         for (Sprite spriteA:spriteManager.getCollisionsToCheck()){
             for (Sprite spriteB:spriteManager.getAllSprites()){
-                if (handleCollision(spriteA, spriteB)) {
+                if (spriteA != spriteB && handleCollision(spriteA, spriteB)) {
                     // The break helps optimize the collisions
                     //  The break statement means one object only hits another
                     // object as opposed to one hitting many objects.
                     // To be more accurate comment out the break statement.
+                    System.out.println("Collision!!!");
                     break;
                 }
             }
@@ -159,7 +160,7 @@ public abstract class GameWorld {
      * @return boolean True if the objects collided, otherwise false.
      */
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
-        return false;
+        return spriteA.collide(spriteB);
     }
 
     /**

@@ -8,7 +8,6 @@ import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -46,7 +45,15 @@ public class Tractor extends Sprite {
     }
 
     @Override
-    Circle getCollisionBounds() {
-        return new Circle(node.getLayoutX(), node.getLayoutY(), 100.0);
+    double getCollisionSphereSize() {
+        return 100.0d;
     }
+
+    @Override
+    public void handleCollisionWith(Sprite other) {
+        if (other instanceof Farmer){
+            ((ImageView)node).setImage(new Image("nl/ufarm/LuckyTractorBloody.png"));
+        }
+    }
+
 }

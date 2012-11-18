@@ -23,7 +23,7 @@ import javafx.scene.shape.Circle;
 public abstract class Sprite {
 
     
-    abstract Circle getCollisionBounds();
+    abstract double getCollisionSphereSize();
     
     
     /** Animation for the node */
@@ -46,8 +46,6 @@ public abstract class Sprite {
      */
     public abstract void update();
     
-    public abstract void handleCollision();
-
     /**
      * Did this sprite collide into the other sprite?
      *
@@ -55,21 +53,8 @@ public abstract class Sprite {
      * @return
      */
     public boolean collide(Sprite other) {
-
-        if (getCollisionBounds() == null || other.getCollisionBounds() == null) {
-            return false;
-        }
-
-        // determine it's size
-        Circle otherSphere = other.getCollisionBounds();
-        Circle thisSphere = getCollisionBounds();
-        Point2D otherCenter = otherSphere.localToScene(otherSphere.getCenterX(), otherSphere.getCenterY());
-        Point2D thisCenter = thisSphere.localToScene(thisSphere.getCenterX(), thisSphere.getCenterY());
-        double dx = otherCenter.getX() - thisCenter.getX();
-        double dy = otherCenter.getY() - thisCenter.getY();
-        double distance = Math.sqrt(dx * dx + dy * dy);
-        double minDist = otherSphere.getRadius() + thisSphere.getRadius();
-
-        return (distance < minDist);
+        return other.node.getBoundsInParent().intersects(this.node.getBoundsInParent());
     }
+    
+    public abstract void handleCollisionWith(Sprite other);
 }

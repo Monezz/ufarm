@@ -4,20 +4,12 @@
  */
 package nl.ufarm;
 
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBuilder;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBoxBuilder;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 /**
@@ -26,8 +18,10 @@ import javafx.stage.Stage;
  */
 public class UFarmGameWorld extends GameWorld {
 
+    public static final int NUMBER_OF_PATCHES = 18;
+    
     public UFarmGameWorld() {
-        super(25, "UFarm");
+        super(1, "UFarm");
     }
 
     @Override
@@ -60,6 +54,8 @@ public class UFarmGameWorld extends GameWorld {
         
         getSceneNodes().getChildren().add(tractor.node);
         getSceneNodes().getChildren().add(farmer.node);
+        
+        setUpPatches(getSceneNodes());
 
 
         buttonPane.addWateringActionHandler(new EventHandler<MouseEvent>() {
@@ -68,6 +64,41 @@ public class UFarmGameWorld extends GameWorld {
                 farmer.toggleWatering();
             }
         });
-
     }
+
+    @Override
+    protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
+        boolean collision = spriteA.collide(spriteB);
+        if (collision){
+            spriteA.handleCollisionWith(spriteB);
+            spriteB.handleCollisionWith(spriteA);
+        }
+        
+        return collision;
+    }
+    
+    private Patch[] setUpPatches(Group root) {
+        Patch[] patches = new Patch[NUMBER_OF_PATCHES];
+        Paint p = new javafx.scene.paint.Color(0, 0, 0, 1);
+
+        for (int i = 0; i < NUMBER_OF_PATCHES; i++) {
+            int xIndex = (i % 3);
+            int yIndex = (i / 3);
+            int minX = 7 + (xIndex * 48) + (yIndex * 30);
+            int minY = 206 + (yIndex * 30) - (xIndex * 6);
+
+            if (i > 8) {
+                minX += 4;
+                minY += 9;
+            }
+
+            Patch patch = new Patch(minX, minY, 73, 35);
+            root.getChildren().add(patch);
+        }
+
+        return patches;
+    }    
+    
+    
+    
 }

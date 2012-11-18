@@ -11,7 +11,6 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Circle;
 
 /**
  *
@@ -19,21 +18,22 @@ import javafx.scene.shape.Circle;
  */
 public class Farmer extends Sprite {
 
-    private final Circle collisionBounds;
-    
     @Override
     public void update() {
     }
 
-    /**
-     *
-     * @return
-     */
-    public Circle getCollisionBounds() {
-        return collisionBounds;
+    @Override
+    double getCollisionSphereSize() {
+        return 50.0d;
     }
 
-    
+    @Override
+    public void handleCollisionWith(Sprite other) {
+        if (other instanceof Tractor){
+            //handle death
+        }
+    }
+
     
     enum MODE {
 
@@ -47,9 +47,6 @@ public class Farmer extends Sprite {
         node = new ImageView(IMG_MODE_NORMAL);
         ((ImageView) node).setX(x);
         ((ImageView) node).setY(y);
-
-        collisionBounds = new Circle(x, y, 50.0);
-
 
 
         final DropShadow dropShadow = new DropShadow();
@@ -78,8 +75,6 @@ public class Farmer extends Sprite {
             public void handle(MouseEvent mouseEvent) {
                 node.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
                 node.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
-                collisionBounds.setCenterX(node.getLayoutX());
-                collisionBounds.setCenterY(node.getLayoutY());
             }
         });
         node.setOnMouseEntered(new EventHandler<MouseEvent>() {

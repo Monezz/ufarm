@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/Ufarm.java</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/Farmer.java</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/Tractor.java</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/LuckyTractor.png</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/ButtonPane.java</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/Sprite.java</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/SpriteManager.java</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/GameWorld.java</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/UFarmGameWorld.java</file>
+        <file>file:/home/monezz/work/ufarm/src/nl/ufarm/ufarm_800_450.jpg</file>
+    </open-files>
 </project-private>
